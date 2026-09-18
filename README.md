@@ -2,7 +2,7 @@
 
 **A discrete grid-world environment with box pushing mechanics and an A\*-based Player AI.**
 
-This repository implements the **Shover-World** project in two phases. The project starts with a custom grid environment where an agent interacts with boxes, lava, barriers, stamina, and perfect-square mechanics. The second phase extends the environment with a classical **A\* search-based Player AI**, heuristic evaluation, and subgoal selection.
+This repository implements the Shover-World project in two phases. The project starts with a custom grid environment where an agent interacts with boxes, lava, barriers, stamina, and perfect-square mechanics. The second phase extends the environment with a classical A\* search-based Player AI, heuristic evaluation, and subgoal selection.
 
 ---
 
@@ -18,7 +18,7 @@ The main environment includes:
 - Stamina and pushing-force mechanics
 - Barriers
 - Perfect-square mechanics
-- Special actions such as **Barrier Maker** and **Hellify**
+- Special actions such as Barrier Maker and Hellify
 - Random or file-based map generation
 - A Pygame-based GUI
 
@@ -46,16 +46,7 @@ Shover-World/
 │   ├── test.py
 │   ├── maps/
 │   └── tests/
-│       ├── conftest.py
-│       ├── test_chain_push_border_lava.py
-│       ├── test_initial_force.py
-│       ├── test_initial_force_chain.py
-│       ├── test_lava.py
-│       ├── test_move.py
-│       ├── test_push.py
-│       ├── test_push2.py
-│       ├── test_push_chain.py
-│       └── test_stamina.py
+│
 │
 ├── phase_2/
 │   ├── environment.py
@@ -66,9 +57,8 @@ Shover-World/
 │   ├── gui_ai.py
 │   ├── maps/
 │   └── tests/
-│       ├── test_heuristic.py
-│       └── test_subgoal.py
-│
+|
+|
 ├── reports/
 ├── .gitignore
 ├── requirements.txt
@@ -94,17 +84,13 @@ Phase 1 implements the core Shover-World environment.
 - Perfect-square detection and aging
 - Barrier Maker
 - Hellify
-- Random map generation
-- Numeric and symbolic map loading
 
-### Cell representation
+### Cell Representation
 
-|   Value | Meaning |
-| ------: | ------- |
-|     `0` | Empty   |
-| `1..99` | Box     |
-|  `-100` | Lava    |
-|   `100` | Barrier |
+- `0` → Empty
+- `1..99` → Box
+- `-100` → Lava
+- `100` → Barrier
 
 The environment treats every positive value below `100` as a box.
 
@@ -142,8 +128,6 @@ State =
     agent direction
     box positions
 ```
-
-Stamina is not explicitly stored in the search state. It is reconstructed through the environment and incorporated into the heuristic evaluation.
 
 ### A\* Search
 
@@ -204,49 +188,6 @@ python gui_ai.py
 ```
 
 The GUI supports both manual interaction and AI-controlled execution.
-
----
-
-## Phase 2 Tests
-
-The Phase 2 tests cover the heuristic and subgoal components.
-
-From main diretory run:
-
-```bash
-pytest phase_2/tests -v
-```
-
-The current test suite contains **8 tests**, covering:
-
-- Basic heuristic evaluation
-- Changes in heuristic value based on box count
-- Initial stamina effects
-- Perfect-square effects
-- Push-to-lava subgoals
-- Perfect-square subgoals
-- Approach-box subgoals
-- Subgoal priority
-
----
-
-## Environment Parameters
-
-Some important environment parameters include:
-
-- `n_rows` — number of grid rows
-- `n_cols` — number of grid columns
-- `max_timestep` — maximum episode length
-- `number_of_boxes` — number of randomly generated boxes
-- `number_of_barriers` — number of barriers
-- `number_of_lavas` — number of lava cells
-- `initial_stamina` — initial stamina
-- `initial_force` — initial pushing force
-- `unit_force` — force cost per pushed box
-- `perf_sq_initial_age` — lifetime of perfect squares
-- `map_path` — optional map file
-- `seed` — random seed
-- `border_lava` — whether border cells are lava
 
 ---
 
